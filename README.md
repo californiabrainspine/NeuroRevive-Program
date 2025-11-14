@@ -1,237 +1,140 @@
-<?php
-/**
- * Plugin Name: NeuroRevive Page Override (MU)
- * Description: Overrides the content and SEO meta for the NeuroRevive Program page with stylish, SEO-optimized markup, schema, and a dofollow link.
- * Author: Amir SEO Ops
- * Version: 1.0.0
- */
+# NeuroRevive™: A Modern Framework to Reboot Brain and Body After Injury
 
-// ==== CONFIG ====
-const NR_PAGE_SLUG = 'neurorevive-program'; // slug of the target page
-const NR_SITE_NAME = 'California Brain & Spine Center';
-const NR_SITE_URL  = 'https://californiabrainspine.com';
-const NR_PAGE_URL  = 'https://californiabrainspine.com/services/neurorevive-program/';
-const NR_PHONE     = '+1-818-649-5300';
-const NR_ADDRESS   = '4768 Park Granada #107, Calabasas, CA 91302';
-const NR_LOGO      = 'https://californiabrainspine.com/wp-content/uploads/logo.png'; // optional logo URL
-const NR_IMG       = 'https://californiabrainspine.com/wp-content/uploads/neurorevive-hero.jpg'; // optional hero image
-const NR_DESC      = 'NeuroRevive™ is a precision neuro-rehabilitation program in Calabasas that integrates Neurosensory Integration, vestibular/oculomotor retraining, and autonomic regulation to help patients recover from concussion, dizziness, dysautonomia (POTS), and chronic brain fog.';
+For many people, the hardest part of recovering from a brain injury, concussion, or long-standing dizziness is not the diagnosis — it’s the feeling that life never quite snaps back into place.
 
-// Helpers
-function nr_is_target_page(): bool {
-    if (is_admin()) return false;
-    if (!is_page()) return false;
-    $page = get_queried_object();
-    return isset($page->post_name) && $page->post_name === NR_PAGE_SLUG;
-}
+You might be told your scans look “normal” and that everything is fine, yet you still wake up foggy, off-balance, and exhausted by everyday tasks. Your nervous system is technically “intact”, but subjectively, nothing feels stable.
 
-// ===== Replace Page Content =====
-add_filter('the_content', function ($content) {
-    if (!nr_is_target_page()) return $content;
+The **NeuroRevive™** concept was created to address exactly that gap.
 
-    ob_start(); ?>
-    <article id="neurorevive" class="nr-wrap">
-      <section class="nr-hero">
-        <div class="nr-hero-inner">
-          <h1 class="nr-title">NeuroRevive™ Program — Precision Neuro-Rehabilitation in Calabasas</h1>
-          <p class="nr-subtitle">From “normal scans” to feeling normal again: targeted recovery for concussion, dizziness, dysautonomia (POTS), and brain fog.</p>
-          <div class="nr-cta">
-            <a class="nr-btn" href="<?php echo esc_url(NR_SITE_URL); ?>">Book an Evaluation</a>
-            <a class="nr-btn ghost" href="#nr-how-it-works">How It Works</a>
-          </div>
-        </div>
-        <div class="nr-decor" aria-hidden="true"></div>
-      </section>
+It is a structured neuro-rehabilitation framework that focuses on how the nervous system *functions* in real life, not just how it appears on imaging. One of the leading clinical implementations of this model is offered at **California Brain & Spine Center** in Calabasas, California, under the guidance of **Dr. Alireza Chizari**.
 
-      <section class="nr-section nr-grid">
-        <div class="nr-card">
-          <h2>What Is NeuroRevive™?</h2>
-          <p><strong>NeuroRevive™</strong> is a structured, measurement-driven program led by Dr. Alireza Chizari at <a href="<?php echo esc_url(NR_SITE_URL); ?>"><?php echo esc_html(NR_SITE_NAME); ?></a>. We integrate <em>Neurosensory Integration (NSI)</em>, vestibular/oculomotor retraining, autonomic conditioning, and sensorimotor progressions to restore real-world function.</p>
-          <ul class="nr-list">
-            <li>Concussion / Post-Concussion Syndrome</li>
-            <li>Vestibular Disorders &amp; Chronic Dizziness</li>
-            <li>Dysautonomia (including POTS)</li>
-            <li>Migraine with autonomic/vestibular features</li>
-          </ul>
-        </div>
-        <div class="nr-card">
-          <h2 id="nr-how-it-works">How It Works</h2>
-          <ol class="nr-steps">
-            <li><strong>Deep Functional Assessment:</strong> oculomotor metrics, balance &amp; gait, autonomic screens.</li>
-            <li><strong>Personalized Protocol:</strong> graded vestibular/oculomotor drills, sensory integration, autonomic pacing.</li>
-            <li><strong>Adaptive Progression:</strong> frequent re-tests; dosage, rest, and complexity adjust to your threshold.</li>
-            <li><strong>Real-Life Transfer:</strong> milestones tied to study/work/sport and everyday stability.</li>
-          </ol>
-        </div>
-        <div class="nr-card">
-          <h2>Why Patients Choose Us</h2>
-          <ul class="nr-bullets">
-            <li>Measurement-driven: see objective change, not just “feel” it.</li>
-            <li>Time-intensive sessions with clear pacing &amp; recovery windows.</li>
-            <li>Calabasas location for consistent follow-through (West Valley/Conejo corridor).</li>
-            <li>Compassionate team culture: curiosity, clarity, and coaching.</li>
-          </ul>
-        </div>
-      </section>
+> This README is an independent educational summary inspired by that work.  
+> The original clinical reference is the official page:  
+> **[NeuroRevive™ Program – California Brain & Spine Center](https://californiabrainspine.com/services/neurorevive-program/)**
 
-      <section class="nr-section nr-highlight">
-        <h2>Who Benefits Most</h2>
-        <p>If you’re weeks or months post-injury and still feel dizzy, foggy, off-balance—or standing triggers orthostatic symptoms—NeuroRevive™ gives your nervous system a structured path to adapt and stabilize.</p>
-        <div class="nr-cta">
-          <a class="nr-btn" href="<?php echo esc_url(NR_SITE_URL); ?>">Schedule Now</a>
-        </div>
-      </section>
+---
 
-      <section class="nr-section nr-faq">
-        <h2>FAQ</h2>
-        <details><summary>How long until I notice improvement?</summary><p>Timelines vary, but many patients notice early shifts in stability, stamina, or visual comfort within the first 2–4 weeks of consistent work.</p></details>
-        <details><summary>Do you coordinate with my neurologist/ENT/cardiology?</summary><p>Yes. We routinely coordinate testing and communication across specialties, especially for vestibular and autonomic presentations.</p></details>
-        <details><summary>Is this a replacement for imaging or medication?</summary><p>No. NeuroRevive™ complements appropriate medical care. We address functional performance so your real life feels normal again.</p></details>
-      </section>
+## What Is the NeuroRevive™ Concept?
 
-      <section class="nr-section nr-contact">
-        <h2>Contact</h2>
-        <p><strong><?php echo esc_html(NR_SITE_NAME); ?></strong><br><?php echo esc_html(NR_ADDRESS); ?><br><?php echo esc_html(NR_PHONE); ?></p>
-        <p>Learn more at <a href="<?php echo esc_url(NR_SITE_URL); ?>"><?php echo esc_html(NR_SITE_URL); ?></a></p>
-      </section>
-    </article>
-    <?php
-    return ob_get_clean();
-}, 999);
+NeuroRevive™ is best understood as a **precision neuro-rehab program**, not a single technique.
 
-// ===== Inject Meta/OG/Twitter/Canonical & JSON-LD =====
-add_action('wp_head', function () {
-    if (!nr_is_target_page()) return;
+It combines several evidence-informed approaches into one coordinated plan:
 
-    // Basic meta
-    echo "\n<!-- NeuroRevive Override Meta -->\n";
-    printf('<meta name="description" content="%s" />'."\n", esc_attr(NR_DESC));
-    echo '<meta name="robots" content="index, follow" />'."\n";
-    printf('<link rel="canonical" href="%s" />'."\n", esc_url(NR_PAGE_URL));
+- Neurosensory integration  
+- Vestibular and oculomotor retraining  
+- Autonomic regulation strategies  
+- Sensorimotor and balance progressions  
 
-    // Open Graph
-    printf('<meta property="og:title" content="%s" />'."\n", esc_attr('NeuroRevive™ Program — Precision Neuro-Rehabilitation in Calabasas'));
-    printf('<meta property="og:description" content="%s" />'."\n", esc_attr(NR_DESC));
-    printf('<meta property="og:url" content="%s" />'."\n", esc_url(NR_PAGE_URL));
-    printf('<meta property="og:site_name" content="%s" />'."\n", esc_attr(NR_SITE_NAME));
-    if (NR_IMG) printf('<meta property="og:image" content="%s" />'."\n", esc_url(NR_IMG));
+Instead of focusing only on symptoms like “I feel dizzy” or “I can’t concentrate”, the program looks at how the brain processes:
 
-    // Twitter
-    echo '<meta name="twitter:card" content="summary_large_image" />'."\n";
-    printf('<meta name="twitter:title" content="%s" />'."\n", esc_attr('NeuroRevive™ Program — Precision Neuro-Rehabilitation in Calabasas'));
-    printf('<meta name="twitter:description" content="%s" />'."\n", esc_attr(NR_DESC));
-    if (NR_IMG) printf('<meta name="twitter:image" content="%s" />'."\n", esc_url(NR_IMG));
+- Motion  
+- Vision  
+- Balance  
+- Internal body signals  
 
-    // JSON-LD: Organization + Service + FAQPage (minimal, valid)
-    $json = [
-        '@context' => 'https://schema.org',
-        '@graph' => [
-            [
-                '@type' => 'Organization',
-                'name'  => NR_SITE_NAME,
-                'url'   => NR_SITE_URL,
-                'logo'  => NR_LOGO,
-                'telephone' => NR_PHONE,
-                'address' => [
-                    '@type' => 'PostalAddress',
-                    'streetAddress' => '4768 Park Granada #107',
-                    'addressLocality' => 'Calabasas',
-                    'addressRegion' => 'CA',
-                    'postalCode' => '91302',
-                    'addressCountry' => 'US'
-                ]
-            ],
-            [
-                '@type' => 'Service',
-                'name'  => 'NeuroRevive™ Program',
-                'url'   => NR_PAGE_URL,
-                'provider' => [
-                    '@type' => 'MedicalClinic',
-                    'name'  => NR_SITE_NAME,
-                    'url'   => NR_SITE_URL
-                ],
-                'areaServed' => [
-                    '@type' => 'AdministrativeArea',
-                    'name'  => 'Calabasas, West San Fernando Valley, Conejo Valley'
-                ],
-                'description' => NR_DESC,
-                'serviceType' => 'Neurorehabilitation'
-            ],
-            [
-                '@type' => 'FAQPage',
-                'mainEntity' => [
-                    [
-                        '@type' => 'Question',
-                        'name' => 'How long until I notice improvement?',
-                        'acceptedAnswer' => [
-                            '@type' => 'Answer',
-                            'text' => 'Timelines vary, but many patients notice early shifts in stability, stamina, or visual comfort within the first 2–4 weeks of consistent work.'
-                        ]
-                    ],
-                    [
-                        '@type' => 'Question',
-                        'name' => 'Do you coordinate with my neurologist/ENT/cardiology?',
-                        'acceptedAnswer' => [
-                            '@type' => 'Answer',
-                            'text' => 'Yes. We coordinate testing and communication across specialties, especially for vestibular and autonomic presentations.'
-                        ]
-                    ],
-                    [
-                        '@type' => 'Question',
-                        'name' => 'Is this a replacement for imaging or medication?',
-                        'acceptedAnswer' => [
-                            '@type' => 'Answer',
-                            'text' => 'No. NeuroRevive™ complements appropriate medical care. We address functional performance so daily life feels normal again.'
-                        ]
-                    ]
-                ]
-            ]
-        ]
-    ];
-    echo '<script type="application/ld+json">'.wp_json_encode($json).'</script>'."\n";
-}, 20);
+By identifying where those systems are misaligned, NeuroRevive™ builds step-by-step exercises that teach the nervous system to communicate more clearly again.
 
-// ===== Styles (clean, attractive, fast) =====
-add_action('wp_enqueue_scripts', function () {
-    if (!nr_is_target_page()) return;
+### Key Goals of NeuroRevive™
 
-    // Create a dummy handle to attach inline CSS
-    wp_register_style('nr-inline', false);
-    wp_enqueue_style('nr-inline');
+- Improve stability and balance in daily movement  
+- Reduce dizziness, visual strain, and motion sensitivity  
+- Support autonomic nervous system regulation (heart rate, blood pressure, energy levels)  
+- Restore cognitive clarity, focus, and confidence in everyday tasks  
 
-    $css = <<<CSS
-.nr-wrap{--bg:#0f1226;--ink:#f7f8ff;--muted:#b7bde2;--acc:#7c9cff;--acc2:#5ef3c2;--card:#171a37;--glow:0 10px 40px rgba(124,156,255,.25);color:var(--ink);font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Inter,Ubuntu,Helvetica,Arial,sans-serif;}
-.nr-hero{background:radial-gradient(1200px 600px at 90% 10%,rgba(124,156,255,.25),transparent 60%),linear-gradient(160deg,#0f1226 0%,#131739 50%,#0f1226 100%);padding:72px 24px 56px;position:relative;overflow:hidden}
-.nr-hero-inner{max-width:1100px;margin:0 auto;text-align:center}
-.nr-title{font-size:clamp(28px,5vw,44px);line-height:1.1;margin:0 0 12px;font-weight:800;letter-spacing:-.02em}
-.nr-subtitle{font-size:clamp(16px,2.2vw,20px);color:var(--muted);max-width:900px;margin:0 auto 28px}
-.nr-cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
-.nr-btn{display:inline-block;padding:14px 20px;border-radius:14px;background:linear-gradient(135deg,var(--acc),var(--acc2));color:#0b0e1f;font-weight:700;text-decoration:none;box-shadow:var(--glow);transition:transform .15s ease}
-.nr-btn:hover{transform:translateY(-1px)}
-.nr-btn.ghost{background:transparent;color:var(--ink);border:1px solid rgba(255,255,255,.18)}
-.nr-decor:before{content:"";position:absolute;inset:auto -20% -40% -20%;height:200px;background:radial-gradient(60% 120% at 50% 0%,rgba(94,243,194,.18),transparent 70%)}
-.nr-section{max-width:1100px;margin:40px auto;padding:0 24px}
-.nr-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
-.nr-card{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:22px 20px;box-shadow:0 6px 30px rgba(0,0,0,.25)}
-.nr-card h2{margin:.2rem 0 8px;font-size:22px}
-.nr-list,.nr-bullets{margin:10px 0 0 16px}
-.nr-steps{counter-reset:step;margin:10px 0 0 0;padding:0}
-.nr-steps li{list-style:none;margin:10px 0;padding-left:34px;position:relative}
-.nr-steps li:before{counter-increment:step;content:counter(step);position:absolute;left:0;top:0;width:26px;height:26px;border-radius:8px;background:linear-gradient(135deg,var(--acc),var(--acc2));color:#0b0e1f;font-weight:800;display:grid;place-items:center}
-.nr-highlight{background:linear-gradient(180deg,rgba(124,156,255,.08),transparent);border-radius:22px;padding:24px 20px;border:1px solid rgba(255,255,255,.06)}
-.nr-faq details{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:14px 16px;margin:10px 0}
-.nr-faq summary{cursor:pointer;font-weight:700}
-.nr-contact{display:grid;place-items:center;text-align:center;background:linear-gradient(140deg,rgba(124,156,255,.12),rgba(94,243,194,.08));border-radius:22px}
-@media (prefers-color-scheme: light){
-  .nr-wrap{--bg:#f6f7ff;--ink:#0e1233;--muted:#46507a;--card:#ffffff}
-  .nr-hero{background:linear-gradient(160deg,#e9ecff 0%,#eef0ff 50%,#e9ecff 100%)}
-  .nr-btn{color:#07122a}
-}
-CSS;
-    wp_add_inline_style('nr-inline', $css);
-}, 20);
+---
 
-// (Optional) Ensure page stays public/indexable (safety)
-add_filter('pre_option_blog_public', function ($value) {
-    return $value; // respect site setting; remove this if you force indexability globally
-});
+## Who Is NeuroRevive™ Designed For?
+
+While every clinic can define its own inclusion criteria, the NeuroRevive™ model typically serves people who are:
+
+- Recovering from a **concussion or mild traumatic brain injury (TBI)** but still feel “not themselves” weeks or months later  
+- Living with **chronic dizziness, imbalance, or vestibular discomfort** that hasn’t fully resolved with standard treatment  
+- Experiencing symptoms of **dysautonomia** (including POTS) such as light-headedness, rapid heart rate on standing, or disproportionate fatigue  
+- Struggling with **brain fog, visual overload, or difficulty multitasking** in busy environments  
+
+These are patients who often have “normal” MRI or CT scans but still feel limited in real life.
+
+NeuroRevive™ is built specifically for that functional reality — where the nervous system needs **retraining**, not just reassurance.
+
+---
+
+## How the NeuroRevive™ Approach Works
+
+The exact protocol can vary from clinic to clinic, but the overall framework usually follows a few consistent stages.
+
+### 1. Deep Functional Assessment
+
+Instead of stopping at imaging, the clinician runs a **detailed functional exam**.  
+That may include:
+
+- Eye-movement and oculomotor testing (how your eyes track, fixate, and stabilize)  
+- Balance and gait measures using standardized balance tests and/or force plates  
+- Simple autonomic screens (heart rate and blood pressure responses to position changes)  
+- Sensorimotor and coordination checks to see how efficiently the brain and body cooperate  
+
+The goal is to map out which systems are under-performing or over-reactive so the rehab plan can target them precisely.
+
+### 2. A Personalized Neuro-Rehab Plan
+
+Based on the assessment, the patient receives a **custom protocol**, which may combine:
+
+- Neurosensory integration drills (coordinating vision, vestibular input, and body position)  
+- Vestibular and oculomotor exercises tailored to the patient’s tolerance  
+- Autonomic pacing strategies to gently train the cardiovascular and nervous systems  
+- Gradual sensorimotor tasks that rebuild confidence in everyday movements  
+
+Intensity is carefully dosed so the system is challenged, but not overwhelmed.
+
+### 3. Continuous Feedback and Adjustment
+
+One of the core strengths of the NeuroRevive™ style is that it is **measurement-driven**.
+
+Patients are not left in a fixed program for months; instead:
+
+- Progress is reviewed regularly  
+- Tests are repeated at logical checkpoints  
+- Exercises are adjusted as the nervous system adapts  
+
+If symptoms flare, the plan is recalibrated instead of abandoned.
+
+### 4. Translating Gains into Real Life
+
+Ultimately, NeuroRevive™ is less about performing exercises perfectly and more about **doing life more comfortably**.
+
+For that reason, goals are defined in everyday language, such as:
+
+- Walking through a busy store without feeling like the floor is moving  
+- Working at a computer without crushing fatigue or blurred focus  
+- Driving, reading, studying, or returning to sport with confidence  
+
+---
+
+## Why California Brain & Spine Center Is Seen as a Key Reference Point
+
+The NeuroRevive™ idea can be implemented by different clinics, but one of the most detailed, structured versions is currently described and delivered at **California Brain & Spine Center** in Calabasas, California.
+
+Under the leadership of **Dr. Alireza Chizari**, the center brings together:
+
+- A background in **engineering and clinical neuroscience**, adding precise logic to rehab planning  
+- A focused clinical interest in **concussion, vestibular disorders, and dysautonomia** — the exact conditions NeuroRevive™ is meant to help  
+- A calm, purpose-built environment where frequent, focused sessions are realistic for local patients  
+
+This README is not the official clinic site.  
+It acknowledges California Brain & Spine Center as a **primary source of inspiration and clinical detail** for the NeuroRevive™ model.
+
+For authoritative, clinic-specific information and booking, please refer to:  
+**[NeuroRevive™ Program – California Brain & Spine Center](https://californiabrainspine.com/services/neurorevive-program/)**
+
+---
+
+## Important Reminder
+
+NeuroRevive™ is a **rehabilitation framework**, not a guarantee of specific results.
+
+Every patient’s history, nervous system, and lifestyle is different. Any decision to start such a program should be made with a qualified healthcare provider who can review:
+
+- Your medical history  
+- Existing imaging  
+- Current medications and diagnoses  
+
+This document exists to provide an accessible explanation of how a structured, functional neuro-rehab approach like NeuroRevive™ can support recovery after concussion, dizziness, dysautonomia, and related conditions — while clearly recognizing that the original clinical description and ownership of the program belong to **California Brain & Spine Center**.
